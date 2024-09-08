@@ -18,7 +18,7 @@ const props = defineProps({
     <div>
       <h2>
         <img src="../../public/favicon.ico" alt="" />
-        らくめし検索
+        らくめし検索！
       </h2>
     </div>
     <div class="right menu">
