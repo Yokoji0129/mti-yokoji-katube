@@ -16,19 +16,36 @@ const toggleProduct = (product) => {
   productData.value = product;
   showProduct.value = !showProduct.value;
 };
+
+//ソート順序の状態
+const isAscending = ref(true);
+//値段でソートするメソッド
+const sortByPrice = () => {
+  props.foodMenuList.sort((a, b) => {
+    if (isAscending.value) {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
+};
+
+//ソート順序を切り替えるメソッド
+const toggleSortOrder = () => {
+  isAscending.value = !isAscending.value;
+  sortByPrice();
+};
 </script>
 
 <template>
-  <h1 class="search" style="text-align: center; margin-top: 10px;">
+  <h1 class="search" style="text-align: center; margin-top: 10px; color: #ffffff;">
     検索結果 {{ foodMenuList.length }} 件
+    <button @click="toggleSortOrder" class="sortBtn">
+      {{ isAscending ? '▼￥安' : '▲￥高' }}
+    </button>
   </h1>
   <ul class="product-list">
-    <li
-      class="li"
-      v-for="(product, index) in foodMenuList"
-      :key="index"
-      @click="toggleProduct(product)"
-    >
+    <li class="li" v-for="(product, index) in foodMenuList" :key="index" @click="toggleProduct(product)">
       <div class="product-box">
         <div class="nutrients-box">
           <div class="nutrients">
@@ -45,11 +62,7 @@ const toggleProduct = (product) => {
         </div>
         <div class="carbohydrates">
           <ul class="material-list">
-            <li
-              v-for="(item, i) in product.material"
-              :key="i"
-              class="material-item"
-            >
+            <li v-for="(item, i) in product.material" :key="i" class="material-item">
               {{ item }}
             </li>
           </ul>
@@ -65,14 +78,10 @@ const toggleProduct = (product) => {
       <h2>会社名: {{ productData.company }}</h2>
       <h2>{{ productData.name }}</h2>
       <h3>価格: ￥{{ productData.price }}</h3>
-      <h3>ジャンル: {{ productData.genre }}</h3>
+      <h3>ジャンル: {{ productData.hope }}</h3>
       <h4>材料:</h4>
       <ul class="material-list">
-        <li
-          v-for="(item, i) in productData.material"
-          :key="i"
-          class="material-item"
-        >
+        <li v-for="(item, i) in productData.material" :key="i" class="material-item">
           {{ item }}
         </li>
       </ul>
@@ -94,6 +103,12 @@ const toggleProduct = (product) => {
 
 
 <style scoped>
+.sortBtn {
+  background-color: #e9854c;
+  padding: 3px;
+  border-radius: 8px;
+}
+
 /**ポップアップデザイン*/
 .form-overlay {
   position: fixed;
@@ -115,7 +130,7 @@ const toggleProduct = (product) => {
   width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  border: 2px solid #af704c;
+  border: 2px solid #ccc;
   position: relative;
 }
 
@@ -123,7 +138,7 @@ const toggleProduct = (product) => {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #af704c;
+  background-color: #805135;
   color: #ffffff;
   border: none;
   padding: 10px;
@@ -135,11 +150,15 @@ const toggleProduct = (product) => {
   background-color: #7f4523;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   margin: 0 0 10px;
 }
 
-.nutrition-list, .material-list {
+.nutrition-list,
+.material-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -156,6 +175,7 @@ h1, h2, h3, h4 {
   background-color: #fbfbfb;
   border: 2px solid #ccc;
 }
+
 .product-list {
   display: flex;
   flex-direction: column;
@@ -180,7 +200,7 @@ li {
   max-width: 800px;
 }
 
-.li{
+.li {
   cursor: pointer;
 }
 

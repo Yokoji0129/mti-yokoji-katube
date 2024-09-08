@@ -55,13 +55,13 @@ const toggleAllergy = (allergy) => {
 }
 
 .allergy-options .allergy-button--selected {
-  border: 1px solid #af704c;
+  border: 2px solid #ccc;
   background-color: #ffe8db;
   color: #af704c;
 }
 
 .allergy-options .allergy-button--default {
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   background-color: #fff;
 }
 </style>

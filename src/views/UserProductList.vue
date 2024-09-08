@@ -133,7 +133,7 @@ onMounted(() => {
   text-align: center;
   padding: 10px;
   color: black;
-  border: 2px solid #9a6447;
+  border: 2px solid #ccc;
   border-radius: 30px;
   font-size: 25px;
   cursor: pointer;
@@ -146,7 +146,7 @@ onMounted(() => {
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  border: 2px solid #af704c;
+  border: 2px solid #ccc;
   z-index: 1000;
   max-height: 75vh;
   margin: 0 0 50px 0;
@@ -155,7 +155,7 @@ onMounted(() => {
 
 .search-container h2 {
   text-align: center;
-  background-color: #af704c;
+  background-color: #805135;
   color: #ffffff;
 }
 
@@ -176,7 +176,7 @@ h3 {
 .search-button {
   width: 100%;
   padding: 10px;
-  background-color: #af704c;
+  background-color: #805135;
   border-radius: 4px;
   color: white;
   border: none;

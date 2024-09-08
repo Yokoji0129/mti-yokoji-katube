@@ -13,10 +13,10 @@ const props = defineProps({
 <template>
   <div
     class="ui secondary pointing inverted massive menu"
-    style="background-color: #af704c; margin: 0"
+    style="background-color: #805135; margin: 0; padding: 8px 0 15px 0;"
   >
     <div>
-      <h2>
+      <h2 style="color: #ffffff;">
         <img src="../../public/favicon.ico" alt="" />
         らくめし検索！
       </h2>
