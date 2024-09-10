@@ -17,7 +17,7 @@ watch(selectedGenre, (newValue) => {
 </script>
 
 <template>
-  <h3>料理ジャンル</h3>
+  <h3 style="margin: 5px;">料理ジャンル</h3>
   <select v-model="selectedGenre">
     <option value="">なし</option>
     <option v-for="(data, index) in cookingGenre" :key="index" :value="data.text">

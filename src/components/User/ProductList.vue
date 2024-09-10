@@ -47,17 +47,22 @@ const toggleSortOrder = () => {
   <ul class="product-list">
     <li class="li" v-for="(product, index) in foodMenuList" :key="index" @click="toggleProduct(product)">
       <div class="product-box">
-        <div class="nutrients-box">
-          <div class="nutrients">
-            <h2>会社名: {{ product.company }}</h2>
+        <div class="test">
+          <div class="nutrients-box">
+            <img :src="product.image">
           </div>
-        </div>
-        <div class="product-info">
-          <div class="product-name">
-            <h3>{{ product.name }}</h3>
-          </div>
-          <div class="product-price">
-            <h3>￥{{ product.price }}</h3>
+          <div class="test2">
+            <div class="nutrients">
+              <h2 class="h2">会社名: {{ product.company }}</h2>
+            </div>
+            <div class="product-info">
+              <div class="product-name">
+                <h3 class="h3" style="color: #ff6347">{{ product.name }}</h3>
+              </div>
+              <div class="product-price">
+                <h3>￥{{ product.price }}</h3>
+              </div>
+            </div>
           </div>
         </div>
         <div class="carbohydrates">
@@ -75,9 +80,9 @@ const toggleSortOrder = () => {
   <div class="form-overlay" v-if="showProduct">
     <div class="product-detail-box">
       <button @click="toggleProduct(null)" class="close-button">閉じる</button>
-      <h2>会社名: {{ productData.company }}</h2>
-      <h2>{{ productData.name }}</h2>
-      <h3>価格: ￥{{ productData.price }}</h3>
+      <h2 class="h2" style="color: #ff6347">{{ productData.name }}</h2>
+      <h2 class="h2">会社名: {{ productData.company }}</h2>
+      <h3 class="h3">価格: ￥{{ productData.price }}</h3>
       <h3>ジャンル: {{ productData.hope }}</h3>
       <h4>材料:</h4>
       <ul class="material-list">
@@ -88,13 +93,15 @@ const toggleSortOrder = () => {
       <h4>栄養成分:</h4>
       <ul class="nutrition-list">
         <li>カロリー: {{ productData.nutrition?.calories || '不明' }} kcal</li>
-        <li>たんぱく質: {{ productData.nutrition?.protein || '不明' }}</li>
-        <li>脂質: {{ productData.nutrition?.fat || '不明' }}</li>
-        <li>ビタミンA: {{ productData.nutrition?.vitaminA || '不明' }}</li>
-        <li>ビタミンC: {{ productData.nutrition?.vitaminC || '不明' }}</li>
-        <li>ビタミンD: {{ productData.nutrition?.vitaminD || '不明' }}</li>
-        <li>塩分: {{ productData.nutrition?.salt || '不明' }}</li>
-        <li>炭水化物: {{ productData.nutrition?.carbohydrates || '不明' }}</li>
+        <li>たんぱく質: {{ productData.nutrition?.protein || '不明' }}g</li>
+        <li>脂質: {{ productData.nutrition?.fat || '不明' }}g</li>
+        <li>ビタミンA: {{ productData.nutrition?.vitaminA || '不明' }}μg</li>
+        <li>ビタミンC: {{ productData.nutrition?.vitaminC || '不明' }}mg</li>
+        <li>ビタミンD: {{ productData.nutrition?.vitaminD || '不明' }}μg</li>
+        <li>塩分: {{ productData.nutrition?.salt || '不明' }}g</li>
+        <li>炭水化物: {{ productData.nutrition?.carbohydrates || '不明' }}g</li>
+        <li>食物繊維: {{ productData.nutrition?.dietaryFiber || '不明' }}g</li>
+        <li>鉄: {{ productData.nutrition?.iron || '不明' }}mg</li>
       </ul>
     </div>
   </div>
@@ -103,6 +110,10 @@ const toggleSortOrder = () => {
 
 
 <style scoped>
+.test {
+  display: flex;
+}
+
 .sortBtn {
   background-color: #e9854c;
   padding: 3px;
@@ -154,7 +165,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0 0 10px;
+  margin: 0 0 5px 0;
 }
 
 .nutrition-list,
@@ -214,16 +225,15 @@ li {
 }
 
 .nutrients-box {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.nutrients-box img {
+  width: 120px;
 }
 
 .nutrients {
   margin-bottom: 7px;
-}
-
-.product-info {
-  display: flex;
-  align-items: center;
 }
 
 .product-price {
@@ -270,6 +280,36 @@ li {
 @media screen and (max-width: 800px) {
   .product-list {
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .h2 {
+    font-size: 20px;
+  }
+
+  .h3 {
+    font-size: 16px;
+  }
+
+  .search {
+    font-size: 24px;
+  }
+
+  .sortBtn {
+    font-size: 24px;
+  }
+
+  .nutrients-box img {
+    width: 100px;
+  }
+
+  .nutrition-list li {
+    font-size: 14px;
+  }
+
+  .material-list li{
+    font-size: 10px;
   }
 }
 </style>

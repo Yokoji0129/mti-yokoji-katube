@@ -24,7 +24,7 @@ const toggleAllergy = (allergy) => {
 </script>
 
 <template>
-  <h3>アレルギー</h3>
+  <h3 style="margin: 5px;">アレルギー</h3>
   <div class="allergy-options">
     <div v-for="(option, index) in allergyOptions" :key="index">
       <button @click="toggleAllergy(option)" :class="[

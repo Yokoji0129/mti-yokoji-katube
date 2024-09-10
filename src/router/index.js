@@ -1,8 +1,7 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import UserProductList from '../views/UserProductList.vue';
 import CoporateProduct from "../views/CorporateProduct.vue"
 import CoporateLogin from "../views/CorporateLogin.vue"
-import CoporateProductList from '../views/CoporateProductList.vue';
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,13 +30,12 @@ const router = createRouter({
       }
     },
     {
-      path: '/coporateproductlist',
-      name: 'CoporateProductList',
-      component: CoporateProductList,
-      meta: {
-        title: 'CoporateProductList'
-      }
-    },
+      path: '/coporateproduct/:text',
+      name: 'coporateproduct',
+      component: CoporateProduct,
+      props: route => ({text: route.params.text}),
+    }
+
   ]
 })
 

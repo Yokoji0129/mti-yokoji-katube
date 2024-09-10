@@ -8,7 +8,7 @@ export let isLoading = ref(false);
 
 //料理ジャンルのデータ
 export const cookingGenre = [
-    { text: "中華料理" },
+    { text: "中華" },
     { text: "和食" },
     { text: "洋食" },
     { text: "韓国料理" },
@@ -32,3 +32,33 @@ export const allergyOptions = [
     { text: "肉類" },
     { text: "シナモン" },
 ];
+
+//嫌いな食べ物データ
+export const dislikeOptions = [
+    { text: "ピーマン" },
+    { text: "ブロッコリー" },
+    { text: "ナス" },
+    { text: "にんじん" },
+    { text: "トマト" },
+    { text: "きのこ" },
+    { text: "ほうれん草" },
+    { text: "玉ねぎ" },
+    { text: "セロリ" },
+    { text: "ズッキーニ" },
+    { text: "米" },
+];
+
+//子供に対する悩みデータ
+export const healthConcerns = [
+    { text: "肥満" },
+    { text: "肝脂肪" },
+    { text: "高血圧" },
+    { text: "糖尿病" },
+    { text: "消化不良" },
+    { text: "アレルギー悪化" },
+    { text: "成長障害" },
+    { text: "痩せ症" },
+    { text: "鉄欠乏性貧血" },
+    { text: "免疫力低下" },
+    { text: "虫歯" }
+  ];

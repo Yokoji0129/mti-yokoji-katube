@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router';
 import { ref, reactive, watch, computed } from 'vue';
 import axios from 'axios';
 import HeaderMenu from '../components/HeaderMenu.vue';
+import LoadingScreen from '../components/LoadingScreen.vue';
 import { baseUrl, isLoading } from "@/assets/config.js";
 
 const router = useRouter();
@@ -54,12 +55,12 @@ const handleBlur = (field) => {
 
 const login = async () => {
   //ログインフォーム入力されてるかを確認
-  if (loginForm.email && loginForm.password) {
+  if (loginForm.companyName && loginForm.password) {
     isLoading.value = true; //ローディング状態にする
 
     try {
       // 非同期メソッドを実行
-      if (isLoading) {
+      if (!isLogin.value) {
         //新規登録処理
         await axios.post(`${baseUrl}/rakumesi/user`, {
           name: loginForm.companyName,
@@ -67,15 +68,21 @@ const login = async () => {
           password: loginForm.password,
           priority: loginForm.priority
         });
+        localStorage.setItem("companyName", loginForm.companyName);
+        router.push(`/coporateproduct/${loginForm.companyName}`)
+        console.log("新規登録")
       } else {
         //ログイン処理
-        await axios.post(`${baseUrl}/rakumesi/user`, {
-          email: loginForm.email,
+        await axios.get(`${baseUrl}/rakumesi/company`, {
+          name: loginForm.companyName,
           password: loginForm.password
         });
+        localStorage.setItem("companyName", loginForm.companyName);
+        router.push(`/coporateproduct/${loginForm.companyName}`)
+        console.log("ログイン")
       }
       //ログイン後にページ遷移
-      router.push('/coporateproduct');
+      router.push(`/coporateproduct`);
     } catch (e) {
       console.error(e);
     } finally {
@@ -94,13 +101,13 @@ const login = async () => {
   <div class="login-page">
     <h1 style="color: #ffffff;">企業{{ toggledText }}</h1>
     <form class="login-form" @submit.prevent="login">
-      <div class="form-group" v-if="!isLogin">
+      <div class="form-group">
         <label for="companyName">企業名</label>
         <input v-model="loginForm.companyName" type="text" id="companyName" @focus="handleFocus('companyName')"
           @blur="handleBlur('companyName')" />
       </div>
 
-      <div class="form-group">
+      <div class="form-group" v-if="!isLogin">
         <label for="email">メールアドレス</label>
         <input v-model="loginForm.email" type="email" id="email" @focus="handleFocus('email')"
           @blur="handleBlur('email')" />
@@ -122,6 +129,9 @@ const login = async () => {
       <button @click="toggleMode" type="button">{{ toggledBtnText }}</button>
     </form>
   </div>
+
+  <!--loading表示-->
+  <LoadingScreen :isLoading="isLoading" />
 </template>
 
 <style scoped>
